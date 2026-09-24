@@ -1,0 +1,57 @@
+{
+  "tasks": [
+    {
+      "id": "2",
+      "title": "Create Dashboard",
+      "description": "Build dashboard statistics",
+      "priority": "High",
+      "assignedTo": "Sriharsha",
+      "status": "completed",
+      "dueDate": "2026-09-27",
+      "category": "Development"
+    },
+    {
+      "id": "3",
+      "title": "Setup JSON Server",
+      "description": "Configure JSON Server database",
+      "priority": "Low",
+      "assignedTo": "bhumi",
+      "status": "todo",
+      "dueDate": "2026-09-23",
+      "category": "Backend"
+    },
+    {
+      "title": "todo",
+      "description": "bfjficnvcbsvcyhgd",
+      "priority": "Medium",
+      "assignedTo": "Sriharsha",
+      "status": "in-progress",
+      "dueDate": "2026-09-22",
+      "id": "6W_pJpv0I3Y"
+    },
+    {
+      "id": "4",
+      "title": "Create Registration Page",
+      "description": "Design registration page for the application",
+      "priority": "High",
+      "assignedTo": "jyothi",
+      "status": "in-progress",
+      "dueDate": "2026-09-30"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "jyothi"
+    },
+    {
+      "id": "2",
+      "name": "Sriharsha"
+    },
+    {
+      "id": "3",
+      "name": "bhumi"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

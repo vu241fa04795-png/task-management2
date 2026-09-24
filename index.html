@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ALARM SOUND -->
+<audio id="alarmSound" preload="auto" loop>
+    <source src="../alarm.mp3" type="audio/mpeg">
+</audio>
+
+    <!-- ALARM BOX -->
+    <div id="alarmBox" class="alarm-box">
+
+        <h3>⏰ Task Due Today!</h3>
+
+        <p id="alarmMessage">
+            Task(s) are due today.
+        </p>
+
+        <button id="stopAlarmBtn">
+            🔕 Stop Alarm
+        </button>
+
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <h1>TaskFlow</h1>
+        <p>Task Management System</p>
+    </header>
+
+    <main>
+
+        <!-- TOP BAR -->
+        <div class="top-bar">
+
+            <h2>My Tasks</h2>
+
+            <div class="top-actions">
+
+                <button id="themeBtn">
+                    🌙 Dark Mode
+                </button>
+
+                <button id="addTaskBtn">
+                    + Add Task
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="dashboard-stats">
+
+            <div class="stat-card">
+                <h3>Total Tasks</h3>
+                <p id="totalTasks">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Completed</h3>
+                <p id="completedTasksStat">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>High Priority</h3>
+                <p id="highPriorityTasks">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Completion</h3>
+
+                <p id="completionPercentage">
+                    0%
+                </p>
+
+                <div class="progress-bar">
+                    <div id="progressFill"></div>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+                <h3>Overdue</h3>
+                <p id="overdueTasks">0</p>
+            </div>
+
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search tasks..."
+            >
+
+            <select id="priorityFilter">
+
+                <option value="All">
+                    All Priorities
+                </option>
+
+                <option value="High">
+                    High
+                </option>
+
+                <option value="Medium">
+                    Medium
+                </option>
+
+                <option value="Low">
+                    Low
+                </option>
+
+            </select>
+
+            <select id="userFilter">
+
+                <option value="All">
+                    All Users
+                </option>
+
+                <option value="jyothi">
+                    Varada
+                </option>
+
+                <option value="Sriharsha">
+                    Sai
+                </option>
+
+                <option value="bhumi">
+                    Ram
+                </option>
+
+            </select>
+
+            <select id="sortFilter">
+
+                <option value="none">
+                    Sort By
+                </option>
+
+                <option value="priority">
+                    Priority
+                </option>
+
+                <option value="dueDate">
+                    Due Date
+                </option>
+
+                <option value="title">
+                    Task Name
+                </option>
+
+            </select>
+
+            <button id="clearFiltersBtn">
+                ✕ Clear Filters
+            </button>
+
+        </div>
+
+        <!-- KANBAN BOARD -->
+        <div class="kanban-board">
+
+            <!-- TODO -->
+            <section class="kanban-column">
+
+                <div class="column-header">
+
+                    <h2>TODO</h2>
+
+                    <span id="todoCount">
+                        0
+                    </span>
+
+                </div>
+
+                <div
+                    id="todoTasks"
+                    class="task-list">
+                </div>
+
+            </section>
+
+            <!-- IN PROGRESS -->
+            <section class="kanban-column">
+
+                <div class="column-header">
+
+                    <h2>IN PROGRESS</h2>
+
+                    <span id="progressCount">
+                        0
+                    </span>
+
+                </div>
+
+                <div
+                    id="progressTasks"
+                    class="task-list">
+                </div>
+
+            </section>
+
+            <!-- COMPLETED -->
+            <section class="kanban-column">
+
+                <div class="column-header">
+
+                    <h2>COMPLETED</h2>
+
+                    <span id="completedCount">
+                        0
+                    </span>
+
+                </div>
+
+                <div
+                    id="completedTasks"
+                    class="task-list">
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ADD / EDIT MODAL -->
+        <div id="taskModal" class="modal">
+
+            <div class="modal-content">
+
+                <h2 id="modalTitle">
+                    Add New Task
+                </h2>
+
+                <form id="taskForm">
+
+                    <label>Task Title</label>
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        required
+                    >
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="taskDescription"
+                        required></textarea>
+
+                    <label>Priority</label>
+
+                    <select
+                        id="taskPriority"
+                        required>
+
+                        <option value="">
+                            Select Priority
+                        </option>
+
+                        <option value="High">
+                            High
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="Low">
+                            Low
+                        </option>
+
+                    </select>
+
+                    <label>Assigned To</label>
+
+                    <select
+                        id="taskAssignedTo"
+                        required>
+
+                        <option value="">
+                            Select User
+                        </option>
+
+                        <option value="jyothi">
+                            Varada
+                        </option>
+
+                        <option value="Sriharsha">
+                            Sai
+                        </option>
+
+                        <option value="bhumi">
+                            Ram
+                        </option>
+
+                    </select>
+
+                    <label>Due Date</label>
+
+                    <input
+                        type="date"
+                        id="taskDueDate"
+                        required
+                    >
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="button"
+                            id="cancelBtn">
+
+                            Cancel
+
+                        </button>
+
+                        <button type="submit">
+                            Save Task
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- VIEW TASK MODAL -->
+        <div id="viewTaskModal" class="modal">
+
+            <div class="modal-content">
+
+                <h2 id="viewTaskTitle">
+                    Task Details
+                </h2>
+
+                <p>
+                    <b>Description:</b>
+                    <span id="viewDescription"></span>
+                </p>
+
+                <p>
+                    <b>Priority:</b>
+                    <span id="viewPriority"></span>
+                </p>
+
+                <p>
+                    <b>Assigned To:</b>
+                    <span id="viewAssignedTo"></span>
+                </p>
+
+                <p>
+                    <b>Status:</b>
+                    <span id="viewStatus"></span>
+                </p>
+
+                <p>
+                    <b>Due Date:</b>
+                    <span id="viewDueDate"></span>
+                </p>
+
+                <button id="closeViewBtn">
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- AXIOS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+    </script>
+
+    <!-- MAIN JS -->
+    <script
+        type="module"
+        src="../js/main.js">
+    </script>
+
+</body>
+</html>
